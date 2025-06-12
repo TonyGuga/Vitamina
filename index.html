@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Catálogo de Produtos com Contato via WhatsApp</title>
+
+  <!-- Importa ícones do Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* Estilo geral da página */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #22328f;
+    }
+
+    /* Cabeçalho da página */
+    header {
+      background-color: #120eda;
+      color: rgb(230, 230, 235);
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Grade de produtos responsiva */
+    .products-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    /* Estilo do card do produto */
+    .product {
+      background: #e6f1f3;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    /* Zoom suave na imagem ao passar o mouse */
+    .product:hover img {
+      transform: scale(2.2);
+    }
+
+    /* Estilo da imagem do produto */
+    .product img {
+      width: 50%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    /* Título do produto */
+    .product h3 {
+      margin: 10px 0 5px;
+      color: #333;
+    }
+
+    /* Descrição curta */
+    .product p {
+      margin: 0 10px 10px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Botão de informações nutricionais */
+    .nutrition-button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* Hover do botão */
+    .nutrition-button:hover {
+      background-color: #035bb4;
+    }
+
+    /* Bloco oculto com animação */
+    .nutrition-info {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      padding: 0 10px;
+    }
+
+    /* Bloco ativo com conteúdo expandido */
+    .nutrition-info.active {
+      max-height: 1000px;
+      padding: 10px;
+      background: #eef;
+      margin: 10px;
+      border-radius: 5px;
+    }
+
+    /* Tabela de informações com ícones */
+    .nutrition-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      color: #444;
+    }
+
+    .nutrition-table td {
+      padding: 6px 8px;
+      vertical-align: top;
+    }
+
+    .nutrition-table i {
+      color: #0101fd;
+      margin-right: 6px;
+    }
+
+    /* Botão do WhatsApp fixo */
+    .social-buttons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .social-buttons a {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #25D366;
+      color: white;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+    }
+
+    .social-buttons a:hover {
+      transform: scale(1.1);
+    }
+
+    /* Rodapé da página */ 
+    footer {
+      background-color: #22328f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer a {
+      color: #00ffff;
+      text-decoration: none;
+
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho da página -->
+  <header>
+    <h1>Catálogo de Produtos com Contato via WhatsApp</h1>
+    <p>Conheça nossos suplementos</p>
+  </header>
+
+  <!-- Seção de produtos -->
+  <div class="products-section">
+
+    <!-- Produto 1 -->
+    <div class="product">
+      <img src="omega3.png" alt="Ômega 3">
+      <h3>Vítamina Neo Química Ômega 3</h3>
+      <p>Auxilia na manutenção de níveis saudáveis de triglicérides Auxilia na manutenção de níveis saudáveis de triglicérides, Este produto contém glúten.</p>
+      <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: Isento de registro</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <!-- Bloco com animação --> 	
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 60 cápsulas  </td><td>gelatinosas.</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Quantidade por porção: 4g</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-fire"></i>Valor energético (kcal) </td><td>31 	2</td></tr>
+          <tr><td><i class="fas fa-bacon"></i>Gorduras totais:</td><td>0 0</td></tr>
+          <tr><td><i class="fas fa-fish"></i>Açúcares totais (g)</td><td>0</td></tr>
+          <tr><td><i class="fas fa-fish"></i>Açúcares adicionados (g)</td><td>0</td></tr>
+          <tr><td><i class="fas fa-fish"></i>Proteínas (g):</td><td>0,7 1</td></tr>
+          <tr><td><i class="fas fa-fish"></i>Gorduras totais (g)</td><td>3 5</td></tr>
+          <tr><td><i class="fas fa-fish"></i>Gorduras saturadas (g)</td><td>0,8  4</td></tr>
+          <tr><td><i class="fas fa-fish"></i>Gorduras poli-insaturadas (g)</td><td>1.1</td></tr>
+          <tr><td><i class="fas fa-fish"></i>EPA (Ác. Eicosapentaenoico - mg)</td><td>540</td></tr>
+          <tr><td><i class="fas fa-fish"></i>DHA (Ác. Docosahexaenoico - mg)</td><td>360 </td></tr>
+          <tr><td><i class="fas fa-fish"></i>Colesterol (mg)</td><td>1.8 7</td></tr>
+          <tr><td><i class="fas fa-fish"></i>Carboidratos (g)</td><td>0 0</td></tr>
+        </table>
+        
+        <p>***Valor diário não estabelecido. Não contém quantidade significativa de proteínas, gorduras totais, 
+          gorduras saturadas, gorduras trans, fibra alimentar e sódio.</p>
+      </div>
+    </div>
+
+    <!-- Produto 2 -->
+    <div class="product">
+      <img src="CabeloeUnha.PNG" alt="Cabelos e Unhas">
+      <h3>Neo Química Cabelos e Unhas</h3>
+      <p>Vitamina C, Zinco, Biotina, Cobre e +13 vitaminas e minerais,Indicações
+        Suplemento alimentar em capsúlas para cabelos e unhas, com ação antioxidanteVitaminas Neo Química é o multivitamínico desenvolvido sob medida, com as vitaminas e minerais ideais para complementar as necessidades nutricionais na dose certa. 
+        Auxilia na manutenção de cabelos, pele e unhas. Ajuda a complementar as necessidades diárias de vitaminas e minerais.</p>
+        <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: Isento de registro</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 60 </td><td>cápsulas</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Ácido fólico:</td><td>240 µg (60%)</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Quantidade por porção 	0,74 g:</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-sun"></i>Vitamina A (ug)</td><td>600 	75</td></tr>
+          <tr><td><i class="fas fa-seedling"></i>Vitamina D (ug):</td><td>5 	33</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina E (mg) </td><td>10 	67</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina C (mg)</td><td>45 	45</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina B1(mg)</td><td>1,2 	100</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina B2(mg)</td><td>1,3 	108</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina B3(mg)</td><td>16 	107</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina B5(mg)</td><td>5 	100</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina B6(mg)</td><td> 	1,3 	100</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina B7(ug)</td><td>30 	100</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Ácido fólico (ug DFE)</td><td>Ácido fólico (ug DFE)</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina B12 (ug) </td><td> 	2,4 	100</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Cobre (ug)</td><td>900 	100</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Cromo (ug)</td><td>35 	100</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Ferro (mg)</td><td> 	14 	100</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Selênio (ug)</td><td> 	34 	57</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Zinco (mg)</td><td> 	7 	64</td></tr>
+        </table>
+
+        <p>***Valor diário não estabelecido. Não contém quantidade significativa de proteínas, gorduras totais, gorduras saturadas, gorduras trans, fibra alimentar e sódio.</p>
+
+      </div>
+    </div>
+
+    <!-- Produto 3 -->
+    <div class="product">
+      <img src="Calcio.PNG" alt="Cabelos e Unhas">
+      <h3>Neo Química Cálcio + Vitamina D  </h3>
+      <p>Indicações Vitaminas Neo Química é o multivitamínico desenvolvido sob medida, com as vitaminas e minerais ideais para complementar as necessidades nutricionais na dose certa. </p>
+      <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: Isento de registro</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 60 </td><td>comprimidos</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Quantidade por porção 1,75g</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Valor energético (kcal)</td><td> 	0 	0</td></tr>
+          <tr><td><i class="fas fa-sun"></i>Carboidratos (g)</td><td> 	0 	0</td></tr>
+          <tr><td><i class="fas fa-seedling"></i>Açúcares totais (g)</td><td> 	0</td></tr>
+          <tr><td><i class="fas fa-dna"></i>çúcares adicionados (g)</td><td>0 	0</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina D (µg)</td><td> 	5 	33</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Cálcio (mg) </td><td> 	600 	60</td></tr>
+        </table>
+
+        <p>***Valor diário não estabelecido. Não contém quantidade significativa de proteínas, gorduras totais, gorduras saturadas, gorduras trans, fibra alimentar e sódio.</p>
+        
+      </div>
+    </div>
+
+    <!-- Produto 4 -->
+    <div class="product">
+      <img src="Imunidade.PNG" alt="Imunidade">
+      <h3>Neo Química Imunidade e Energia</h3>
+      <p>Princípio Ativo Vitaminas C e E, Selênio e Zinco,Indicações, Vitaminas Neo Química é um suplemento alimentar em comprimido, que contém vitaminas e mineiras para auxiliar no sistema imunológico. Além disso, tem ação antioxidante. As vitaminas C e E, o selênio e o zinco são antioxidantes que auxiliam na proteção dos danos causados pelos radicais livres. A vitamina C, o selênio e o zinco auxiliam no funcionamento do sistema imune. A vitamina C auxilia no metabolismo energético.</p>
+      <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: Isento de registro</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 60 </td><td>comprimidos</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Quantidade por porção 2,73g</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Valor energético (kcal)</td><td>0 	0</td></tr>
+          <tr><td><i class="fas fa-sun"></i>Carboidratos (g)</td><td>0 	0</td></tr>
+          <tr><td><i class="fas fa-seedling"></i>Açúcares totais (g)</td><td>0</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Açúcares adicionados (g)</td><td>0 	0</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Sódio (mg)</td><td>240 144 	7</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina E (mg)</td><td> 	200 	1333</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina C (mg)</td><td>1000 	1000</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Selênio (µg)</td><td>100 	167</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Zinco (mg)</td><td> 	10 	91</td></tr>
+        </table>
+
+        <p>***Valor diário não estabelecido. Não contém quantidade significativa de proteínas, gorduras totais, gorduras saturadas, gorduras trans, fibra alimentar e sódio.</p>
+
+      </div>
+    </div>
+
+     <!-- Produto 5 -->
+     <div class="product">
+      <img src="Senio.PNG" alt="Sênior">
+      <h3>Neo Química A-Z Sênior</h3>
+      <p>Vitaminas B2, B6, B12, A, D, C e E, Selênio, Zinco e Manganês,Indicações Vitaminas Neo Química é o multivitamínico desenvolvido sob medida, com as vitaminas e minerais ideais para complementar as necessidades nutricionais na dose certa. As vitaminas B2, C e E, o manganês, o selênio e o zinco são antioxidantes que auxiliam na proteção dos danos causados pelos radicais livres. As vitaminas A, B6, B12, C, D, o ácido fólico, o ferro, o selênio e o zinco auxiliam no funcionamento do sistema imune. A vitamina D auxilia na formação de ossos e dentes. O manganês auxilia na formação de ossos.</p>
+      <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: N/A</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 60 </td><td>comprimidos</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Quantidade por porção 0,54g</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Valor energético (kcal)</td><td> 	0 	0</td></tr>
+          <tr><td><i class="fas fa-sun"></i>Carboidratos (g)</td><td> 	0 	0</td></tr>
+          <tr><td><i class="fas fa-seedling"></i>Açúcares totais (g):</td><td> 	0</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Açúcares adicionados (g)</td><td>0 	0</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina A (µg)</td><td>600 	75</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina D (µg)</td><td>5 	33</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina E (mg)</td><td>10 	67</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina C (mg)</td><td>45 	45</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Riboflavina (mg)</td><td>1,3 	108</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Niacina (mg)</td><td>13 	87</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Tiamina (mg)</td><td>1,2 	100</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Ácido pantotênico (mg)</td><td>5 	100</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina B6 (mg)</td><td>0,5 	39</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Ácido fólico (µg de DFE)</td><td>240 	60</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina B12 (µg)</td><td>2,4 	100</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Ferro (mg)</td><td>10 	71</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Manganês (mg)</td><td>1,6 	53</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Selênio (µg)</td><td>34 	57</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Zinco (mg)</td><td>2 	18</td></tr>
+        </table>
+
+        <p>***Valor diário não estabelecido. Não contém quantidade significativa de proteínas, gorduras totais, gorduras saturadas, gorduras trans, fibra alimentar e sódio.</p>
+      </div>
+    </div>
+
+    <!-- Produto 6 -->
+    <div class="product">
+      <img src="Homens.PNG" alt="Homem">
+      <h3>Neo Química Homem</h3>
+      <p>Vitamina B6, Selênio, Zinco e Biotina, Indicações, Vitaminas Neo Química é o multivitamínico desenvolvido sob medida, com as vitaminas e minerais ideais para complementar as necessidades nutricionais na dose certa. O selênio e o zinco são antioxidantes que auxiliam na proteção dos danos causados pelos radicais livres. A vitamina B6, o selênio e o zinco auxiliam no funcionamento do sistema imune. A biotina contribui para a manutenção do cabelo e da pele. O zinco contribui para a manutenção do cabelo, da pele e das unhas.</p>
+      <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: N/A</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 60 </td><td>comprimidos</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Quantidade por porção 4g</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Valor Energético</td><td>0 Kcal=0KJ 	0</td></tr>
+          <tr><td><i class="fas fa-sun"></i>Carboidratos, dos quais</td><td>0g 	0</td></tr>
+          <tr><td><i class="fas fa-seedling"></i>Açúcares</td><td> 	0g 	0</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Zinco</td><td> 	7,0 mg 	64</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Selênio</td><td>34 µg 	57</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina B6</td><td> 	1,3 mg 	100</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Cromo</td><td>16 µg 	46</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Biotina</td><td>30 µg 	100</td></tr>
+        </table>
+
+        <p>***Valor diário não estabelecido. Não contém quantidade significativa de proteínas, gorduras totais, gorduras saturadas, gorduras trans, fibra alimentar e sódio.</p>
+
+      </div>
+    </div>
+
+    <!-- Produto 7 -->
+    <div class="product">
+      <img src="Mulher.PNG" alt="Mulher">
+      <h3>Neo Química Mulher</h3>
+      <p>Vitamina B1, B2, B3, B5, B6, B9, B12, A, C, D, Ferro, Manganês e Zinco. Indicações Vitaminas Neo Química é o multivitamínico desenvolvido sob medida, com as vitaminas e minerais ideais para complementar as necessidades nutricionais na dose certa. As vitaminas B2 e C, o manganês e o zinco são antioxidantes que auxiliam na proteção dos danos causados pelos radicais livres. As vitaminas A, B6, B12, C, D, o ácido fólico, o ferro e o zinco auxiliam no funcionamento do sistema imune. O zinco, a vitamina A e B3 contribuem para manutenção do cabelo, da pele e das unhas.</p>
+      <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: N/A</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 60 </td><td>comprimidos</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Quantidade por porção 4g</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Valor Energético</td><td>0kcal = 0kJ 	0</td></tr>
+          <tr><td><i class="fas fa-sun"></i>Carboidratos, dos quais</td><td>0g 	0</td></tr>
+          <tr><td><i class="fas fa-seedling"></i>Açúcares</td><td>0g 	**</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitamina A</td><td>600 µg 	75</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Vitamina B1 (Tiamina)</td><td>1,1 mg 	92</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Vitamina B2 (Riboflavina)</td><td>1,3 mg 	108</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Vitamina B3 (Niacina)</td><td>13 mg 	87</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Vitamina B5 (Ácido Pantotênico)</td><td> 	5,0 mg 	100</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Vitamina B6 (Piridoxina)</td><td>0,50 m 	39</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Ácido Fólico</td><td> 	240 µg 	60</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Vitamina B12 (Cianocobalamina)</td><td>2,4 µg 	100</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Vitamina C</td><td>45 mg 	45</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Vitamina D</td><td>5,0 µg 	33</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Manganês</td><td> 	1,6 mg 	53</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Zinco</td><td>2,0 mg 	18</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Ferro</td><td> 	10 mg 	71</td></tr>
+        </table>
+
+        <p>Não contém quantidade significativa de proteínas, gorduras totais, gorduras saturadas, gorduras trans, fibra alimentar e sódio. *Percentual de valores diários fornecidos pela porção.**VD não estabelecido</p>
+      </div>
+    </div>
+
+     <!-- Produto 8 -->
+     <div class="product">
+      <img src="Kids.PNG" alt="kids">
+      <h3>Neo Química Kids</h3>
+      <p>Vitaminas A, B6, B2, B12, C, D, Cálcio e Ferro, Indicação: A partir de 4 anos Posologia: 2 a 3 comprimidos Recomendação: uso diário</p>
+      <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: N/A</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 60 </td><td>comprimidos</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Vitaminas</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina </td><td>A</td></tr>
+          <tr><td><i class="fas fa-sun"></i>Vitamina </td><td>B6</td></tr>
+          <tr><td><i class="fas fa-seedling"></i>Vitaminas</td><td>B2</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitaminas </td><td>B12</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitaminas</td><td>C</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitaminas</td><td>d</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Cálcio</td><td></td></tr>
+          <tr><td><i class="fas fa-dna"></i>Ferro</td><td></td></tr>
+        </table>
+      </div>
+    </div>
+
+     <!-- Produto 9 -->
+     <div class="product">
+      <img src="Melatonina.PNG" alt="Melatonina">
+      <h3>Neo Química Melatonina</h3>
+      <p>Melatonina, Indicações Suplemento alimentar em comprimido orodispersível. Sabor artificial maracujá. Aromatizado artificialmente. Zero Açúcares. Zero calorias</p>
+      <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: Alimento isento de registro</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 90 </td><td>comprimidos</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr
+          <tr><td><i class="fas fa-weight"></i>Quantidade por porção</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Valor energético (kcal)</td><td>0 	0</td></tr>
+          <tr><td><i class="fas fa-sun"></i>Carboidratos(g)</td><td>0g 	0</td></tr>
+          <tr><td><i class="fas fa-seedling"></i>Açúcares totais(g)</td><td> 	0</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Açúcares adicionados(g)</td><td>0 	0</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Melatonina(mg)</td><td> 0,20 	</td></tr>
+        </table>
+        <p>***Valor diário não estabelecido. Não contém quantidade significativa de proteínas, gorduras totais, gorduras saturadas, gorduras trans, fibra alimentar e sódio.</p>
+      </div>
+    </div>
+
+     <!-- Produto 10 -->
+     <div class="product">
+      <img src="A-Z.PNG" alt="A-Z Imunidade">
+      <h3>Neo Química A-Z Imunidade</h3>
+      <p>Vitaminas B1, B2, B3, B5, B6, B12, A, C e D, Ferro, Zinco e Manganês, Vitaminas Neo Química é o multivitamínico desenvolvido sob medida, com as vitaminas e minerais ideais para complementar as necessidades nutricionais na dose certa. As vitaminas B2 e C, o manganês e o zinco são antioxidantes que auxiliam na proteção dos danos causados pelos radicais livres. As vitaminas A, B12, B6, C e D, o ferro e o zinco auxiliam no funcionamento do sistema imune. As vitaminas B1, B2, B3, B5, B6, B12, C, o ferro e o manganês auxiliam no metabolismo energético.</p>
+      <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO.Registro MS: Isento de registro</p>
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+      <div class="nutrition-info">
+        <table class="nutrition-table">
+          <tr><td><i class="fas fa-weight"></i>Frasco com 60 </td><td>comprimidos</td></tr>
+          <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Quantidade por porção</td><td>%VD(*)%VD(*)</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitaminas</td><td>B1</td></tr>
+          <tr><td><i class="fas fa-sun"></i>Vitaminas</td><td>B2</td></tr>
+          <tr><td><i class="fas fa-seedling"></i>Vitaminas </td><td>B3</td></tr>
+          <tr><td><i class="fas fa-dna"></i>Vitaminas </td><td>B5</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina</td><td>B6</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina</td><td>B12</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina</td><td>A</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina </td><td>C</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Vitamina</td><td>D</td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Ferro</td><td></td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Zinco</td><td></td></tr>
+          <tr><td><i class="fas fa-carrot"></i>Manganês</td><td></td></tr>
+        </table>
+      </div>
+    </div>
+
+ <!-- Produto 11 -->
+ <div class="product">
+  <img src="VitaminaD.PNG" alt="Vitamina D">
+  <h3>Neo Química Vitaminas D 2000 U.I</h3>
+  <p>Indicações, Auxilia no funcionamento do sistema imune e muscular, formação de ossos e dentes e absorção de cálcio e fósforo .</p>
+  <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: Isento de registro</p>
+  <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+  <div class="nutrition-info">
+    <table class="nutrition-table">
+      <tr><td><i class="fas fa-weight"></i>Frasco com 30 </td><td>comprimidos</td></tr>
+      <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+      <tr><td><i class="fas fa-weight"></i>Quantidade por porção0,156g</td><td>VD()9a18anosVD()19anos</td></tr>
+      <tr><td><i class="fas fa-carrot"></i>Carboidratos(g)</td><td> 	0 	0 	0</td></tr>
+      <tr><td><i class="fas fa-sun"></i>Açúcares totais(g)</td><td>0 		</td></tr>
+      <tr><td><i class="fas fa-seedling"></i>Açúcares adicionados(g)</td><td>0 	0 	0</td></tr>
+      <tr><td><i class="fas fa-dna"></i>Vitamina D (µg)</td><td> 	50 	333 	333</td></tr>
+    </table>
+
+    <p>Não contém quantidades significativas de proteínas, gorduras totais, gorduras saturadas, gorduras trans, fibras alimentares e sódio.*Percentual de valores diários fornecidos pela porção.50µg = 2.000UI de vitamina D.  </p>
+  </div>
+</div>
+
+ <!-- Produto 12-->
+ <div class="product">
+  <img src="Colageno.PNG" alt="Colágeno">
+  <h3>Neo Química Colágeno</h3>
+  <p>Colágeno tipo II não desnaturado, Indicações Suplemento alimentar em cápsulas de colágeno tipo II não desnaturado </p>
+  <p>SE PERSISTIREM OS SINTOMAS O MÉDICO DEVERÁ SER CONSULTADO. Registro MS: Isento de registro</p>
+  <button class="nutrition-button" onclick="toggleNutrition(this)">Ver Informações Nutricionais</button>
+
+  <div class="nutrition-info">
+    <table class="nutrition-table">
+      <tr><td><i class="fas fa-weight"></i>Frasco com 30 </td><td>comprimidos</td></tr>
+      <tr><td><i class="fas fa-weight"></i>Este produto contém</td><td>glúten.</td></tr>
+      <tr><td><i class="fas fa-weight"></i>Quantidade por porção 175mg</td><td>%VD(*)%VD(*)</td></tr>
+      <tr><td><i class="fas fa-carrot"></i>Valor energético (kcal)</td><td>0 	0</td></tr>
+      <tr><td><i class="fas fa-sun"></i>Carboidratos(g)</td><td> 	0 	0</td></tr>
+      <tr><td><i class="fas fa-seedling"></i>Açúcares totais(g)</td><td> 	0</td></tr>
+      <tr><td><i class="fas fa-dna"></i>Colágeno tipo II não desnaturado(mg)*</td><td>1,6 	0</td></tr>
+    </table>
+
+    <p>Não contém quantidades significativas de valor energético, proteínas, gorduras totais, gorduras saturadas, gorduras trans,fibras alimentares e sódio.*Percentual de valores diários fornecidos pela porção. *Proveniente de 40mg de Collavant</p>
+  </div>
+</div>
+
+  <!-- Botão fixo do WhatsApp -->
+  <div class="social-buttons">
+    <a href="https://wa.me/5511989955242" title="Fale conosco no WhatsApp" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
+
+
+  <!-- Rodapé da página -->
+  <footer>
+  <p>Entre em contato: <a href="mailto:tonygugatg02@gmail.com">tonygugatg02@gmail.com</a></p>
+  </footer>
+
+  <!-- Script JavaScript para alternar a exibição com animação -->
+  <script>
+    function toggleNutrition(button) {
+      const info = button.nextElementSibling;
+      info.classList.toggle("active");
+    }
+  </script>
+  
+</body>
+</html>
